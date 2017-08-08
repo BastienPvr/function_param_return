@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>FunParamReturn2</title>
+    </head>
+    <body>
+        <ul>
+            <li>a</li>
+            <li>b</li>
+            <li id="c">c</li>
+            <li>d</li>
+            <li>e</li>
+        </ul>
+        <script src="jquery-1.11.0.min.js"></script>
+        <script>
+            function deleteNodes(list){
+                var count=0;
+                list.forEach(function(elem){
+                    elem.parentElement.removeChild(elem);
+                    count++
+                });
+                if(list.length===count){
+                    return true
+                }else{
+                    return false
+                }
+            }
+
+            function isOdd(n){
+                if(typeof n !== "number"){
+                    throw new Error("Please pass a number as argument");
+                }else if(n/2%1===0){
+                    return true
+                }else{
+                    return false
+                }
+            }
+
+            function sum(a){
+                var sum = 0
+                a.forEach(function(elem){
+                    if(typeof elem !== "number"){
+                        throw new Error("Please pass a number as argument");
+                    }else{
+                        sum+=elem
+                    }
+                });
+                return sum
+            }
+
+            function getNodesMetrics(nl){
+                var table=[];
+                var count = 0
+                nl.forEach(function(elem){
+                    var newObject = {};
+                    newObject.tabindex = count;
+                    newObject.node = elem;
+                    newObject.width = elem.getBoundingClientRect().width;
+                    newObject.height = elem.getBoundingClientRect().height;
+                    table.push(newObject);
+                    count++;
+                });
+                return table
+            }
+
+            function usingCallback(clbk){
+                clbk("Ceci est un Callback !!!");
+            }
+
+            function usingCallback2(clbk, url){
+                var table=[];
+                $.get(url, function(data){
+                    data.records.forEach(function(elem){
+                        table.push(elem.fields)
+                    });
+                    clbk(table)
+                })
+            }
+
+            window.onload=function(){
+                var tries={
+                    nom:"lhotel",
+                    nombreEtoile:3,
+                    ville:"Aulnay",
+                    aPiscine:false,
+                    nbChambres:30,
+                    nbChambresReservees:10,
+                    urlSite:"www.lhotel.fr"
+                }
+
+                function error(property, type){
+                    throw new Error("la propriété '"+property+"' doit être du type '"+type+"'.")
+                }
+
+                function Hotel(infos){
+                    this.nom = typeof infos.nom==="string"?infos.nom:error("nom","string");
+                    this.nombreEtoile = typeof infos.nombreEtoile==="number"?infos.nombreEtoile:error("nombreEtoile","number");
+                    this.ville = typeof infos.ville==="string"?infos.ville:error("ville","string");
+                    this.aPiscine = typeof infos.aPiscine==="boolean"?infos.aPiscine:error("aPiscine","boolean");
+                    this.nbChambres = typeof infos.nbChambres==="number"?infos.nbChambres:error("nbChambres","number");
+                    this.nbChambresReservees = typeof infos.nbChambresReservees==="number"?infos.nbChambresReservees:error("nbChambresReservees","number");
+                    this.urlSite = typeof infos.urlSite==="string"?infos.urlSite:error("urlSite","string");
+                }
+
+                var h1 = new Hotel(tries);
+                var h2 = new Hotel(tries);
+
+                Hotel.prototype.reserverChambre=function reserverChambre(n){
+                    console.log("Il restait "+(this.nbChambres-this.nbChambresReservees)+" chambres");
+                    console.log(n);
+                    this.nbChambresReservees+=n;
+                    console.log("Il reste "+(this.nbChambres-this.nbChambresReservees)+" chambres")
+                }
+                h1.reserverChambre(5);
+                h1.reserverChambre(2);
+                h2.reserverChambre(20);
+            }
+        </script>
+    </body>
+</html>

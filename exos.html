@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Exo1</title>
+    </head>
+    <body>
+        <script>
+
+            /**
+            * Affiche une alerte
+            * @param {string} text - Le contenu de l'alerte
+            * @example
+            * function one(text){
+            *     window.alert(text)
+            * }
+            */
+            function one(text){
+                window.alert(text)
+            }
+
+            /**
+            * Affiche une entrée dans la console
+            * @param {string} text - Le contenu de l'entrée'
+            * @example
+            * function hello(text){
+            *     console.log(text)
+            * }
+            */
+            function hello(text){
+                console.log(text)
+            }
+
+            /**
+            * Retourne l'entrée
+            * @param {string} text - Le contenu du retour
+            * @example
+            * function dummyReturn(text){
+            *     return text
+            * }
+            */
+            function dummyReturn(text){
+                return text
+            }
+
+            /**
+            * Retourne la string "bar"
+            */
+            function foo(){
+                return "bar"
+            }
+
+            /**
+            * Retourne une salutation
+            * @param {string} nom - L'adresse de la salutation
+            */
+            function helloWho(nom){
+                return "Hello "+nom
+            }
+
+            /**
+            * Vérifie si une entrée est un nombre
+            * @param {number} n - L'entrée à vérifier
+            */
+            function isNumber(n){
+                if(typeof n === "number"){
+                    return true
+                }else{
+                    return false
+                }
+            }
+
+            /**
+            * Retourne l'inverse d'un booléen
+            * @param {boolean} b - Le booléen
+            */
+            function contraire(b){
+                if (typeof b !== "boolean"){
+                    return new Error("Please pass a boolean as argument");
+                }
+                return !b
+            }
+
+            /**
+            * Vérifie si une string, un array ou un object est vide
+            * @param {string, array, object} p - L'entrée à vérifier
+            */
+            function isEmpty(p){
+                if((typeof p==="string" || typeof p==="object") && (p==="" || Object.getOwnPropertyNames(p).length===0 || p.length===0)){
+                    return true
+                }
+                return false
+            }
+
+            /**
+            * Ajoute une classe sur un élément donné
+            * @param {string} s - Un sélecteur css
+            * @param {string} css - une classe css
+            */
+            function addCSSClass(s, css){
+                var arr = [];
+                document.querySelectorAll(s).forEach(function(elem){
+                    elem.classList.add(css);
+                    arr.push(elem)
+                });
+                return arr
+            }
+        </script>
+    </body>
+</html><!---->
